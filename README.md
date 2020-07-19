@@ -32,7 +32,7 @@ Compositionally-complex Alloy Research Directive Inference GAN, a hybrid empiric
 1. This application supports calculations for 14 empirical parameters of compositionally complex alloys. 
 
 ## Authors and acknowledgment
-Zhipeng Li (u6766505@anu.edu.au), Will Nash, Nick Birbilis
+Zhipeng Li (u6766505@anu.edu.au), Will Nash, Nick Birbilis  
 Zhipeng Li performed the bulk of model design and coding, with guidance from Will Nash. Nick Birbilis supervised the project. 
 
 ## License

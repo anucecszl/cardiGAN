@@ -1,9 +1,8 @@
 import numpy as np
 import torch
 import torch.nn as nn
-import phase_classifier
-import parameters
-import pytorch_calculator as calculator
+import hyper_parameters as parameters
+import parameter_calculator as calculator
 from torch.utils.data import DataLoader, Dataset
 
 # The path to save the trained generator model.
@@ -14,11 +13,6 @@ cca_compositions = np.genfromtxt('data/train_composition.csv', delimiter=',')
 cca_parameters = np.loadtxt('data/train_parameter.csv', delimiter=',')
 param_mean = cca_parameters.mean(axis=0)
 param_std = cca_parameters.std(axis=0)
-# Load the trained phase classifier model.
-classifier_path = 'saved_models/classifier_net.pt'
-classifier = phase_classifier.Classifier()
-classifier.load_state_dict(torch.load(classifier_path))
-classifier.eval()
 
 
 # —————————————————————————————————— Customize the training set ————————————————————————————————————————
@@ -32,7 +26,7 @@ class TrainingSet(Dataset):
         # Load the element compositions of the 278 existing CCAs.
         compositions = np.loadtxt('data/train_composition.csv', delimiter=',')
         compositions = np.concatenate(
-            (compositions, parameters.sum_one * np.ones((compositions.shape[0], 1)) - parameters.sum_one), axis=1)
+            (compositions, np.ones((compositions.shape[0], 1)) - 1), axis=1)
 
         # Load the empirical parameters and normalize it into a Gaussian distribution.
         cca_params = np.loadtxt('data/train_parameter.csv', delimiter=',')
@@ -100,10 +94,40 @@ class Discriminator(nn.Module):
         return y
 
 
+class Classifier(nn.Module):
+    """
+    The phase classifier neural network of the cardiGAN model. The network used in the GAN training is pre-trained on
+    the 12 empirical parameters and reported phases of the 278 existing CCAs.
+    The reported phases are divided into 3 classes: single solid-solution, mixed solid-solution, solid-solution with
+    secondary phases.
+    """
+
+    def __init__(self):
+        super(Classifier, self).__init__()
+
+        # Set the model to have two latent layers with LeakyReLU activation functions.
+        self.model = nn.Sequential(
+            nn.Linear(12, 12),
+            nn.LeakyReLU(),
+            nn.Linear(12, 12),
+            nn.LeakyReLU(),
+            nn.Linear(12, 3),
+        )
+
+    def forward(self, x):
+        predicted_phase = self.model(x)
+        return predicted_phase
+
+
 # ————————————————————————————————— Set up the neural networks ————————————————————————————————————
 
 generator = Generator()
 discriminator = Discriminator()
+# Load the trained phase classifier model.
+classifier_path = 'saved_models/classifier_net.pt'
+classifier = Classifier()
+classifier.load_state_dict(torch.load(classifier_path))
+classifier.eval()
 
 # As recommended in 'Wasserstein GAN' (https://arxiv.org/abs/1701.07875), both networks apply RMSprop optimization.
 optimizer_G = torch.optim.RMSprop(generator.parameters(), lr=parameters.lr_generator, )
@@ -133,7 +157,7 @@ def generate_novel_input(size):
         param_std[parameters.ANN_param_selection]).float()
     # Concatenate the generated CCA candidates and their calculated empirical parameters as inputs of the discriminator.
     novel_alloy = torch.cat(
-        [novel_alloy_norm, parameters.sum_one * torch.sum(novel_alloy, axis=1).view((-1, 1)) - parameters.sum_one], dim=1)
+        [novel_alloy_norm, torch.sum(novel_alloy, axis=1).view((-1, 1)) - 1], dim=1)
     novel_input = torch.cat([novel_alloy, novel_param], dim=1)
 
     return novel_input, phase_param

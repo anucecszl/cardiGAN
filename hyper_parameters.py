@@ -1,70 +1,71 @@
-# ————————————————————————————————— Setting up values/hyper-params ————————————————————————————————————
-# Element list to be used, this list includes all the elements in element_list.py and elements occurred in the data set.
-element_list = ["Ag", "Al", "Au", "B", "Be", "Bi", "C", "Ca", "Cd", "Ce", "Co", "Cr", "Cu", "Dy", "Er", "Fe", "Gd",
-                "Ge", "Hf", "Ho", "In", "Ir", "La", "Li", "Lu", "Mg", "Mn", "Mo", "Nb", "Nd", "Ni", "Os", "P", "Pb",
-                "Pd", "Pr", "Pt", "Re", "Rh", "Ru", "Sb", "Sc", "Si", "Sm", "Sn", "Sr", "Ta", "Tb", "Ti", "Tm", "V",
-                "W", "Y", "Yb", "Zn", "Zr"]
-# '0 Enthalpy', '1 std_enthalpy', '2 a', '3 Delta', '4 Omega', '5 Entropy', '6 Tm', '7 std_Tm', '8 X', '9 std_X',
-# '10 VEC', '11 std_VEC', '12 Phase',
+# This file contains the constant values and hyperparameters occurred in this project.
 
-# including 'std_*****' in the GAN training might produce nan (in the back propagation process)
-GAN_param_selection = [0, 7, 3, 6, 1, 2, 11, 5, 9, 10, 8]
-ANN_param_selection = [0, 7, 3, 6, 1, 2, 11, 5, 9, 4, 10, 8]
-
-# The empirical parameter list
+# The empirical parameter names.
 empirical_params = ['Enthalpy(kJ/mol)', 'std_enthalpy(kJ/mol)', 'a', 'Delta(%)', 'Omega', 'Entropy(J/K*mol)', 'Tm(K)',
                     'std_Tm (%)', 'X', 'std_X(%)', 'VEC', 'std_VEC', 'Phase(0-1)', 'Density(g/com^3)',
                     'Price(USD/kg)']
 
-# Setting batch size, calculator accuracy, clip value
+# The indices of parameters used for training of the GAN and ANN models.
+GAN_param_selection = [0, 7, 3, 6, 1, 2, 11, 5, 9, 10, 8]
+ANN_param_selection = [0, 7, 3, 6, 1, 2, 11, 5, 9, 4, 10, 8]
+
+# Setting the batch size and clip range.
 size_batch = 3
 clip_range = 0.015
 
-# Setting learning rate for all the three models
+# Setting learning rates for the models.
 lr_generator = 1e-4
 lr_discriminator = 1e-4
 
-sum_one = 1
+num_epoch = 1000  # GAN training epoch
 
-num_epoch_ANN = 5000
-num_epoch = 5000  # GAN training epoch
+num_latent = 12  # the number of latent variable (the input of the generator network).
+num_elements = 56  # the number of output of the generator network.
+num_params = len(GAN_param_selection)  # the number of empirical parameters.
 
-num_latent = 12  # number of latent parameters, the input of the Generator
-num_elements = len(element_list)  # number of output of the Generator
-num_params = len(GAN_param_selection)  # number of empirical parameters fed into the Discriminator
+# The 56 elements discovered for designing novel CCAs.
+element_list = ["Ag", "Al", "Au", "B", "Be", "Bi", "C", "Ca", "Cd", "Ce", "Co", "Cr", "Cu", "Dy", "Er", "Fe", "Gd",
+                "Ge", "Hf", "Ho", "In", "Ir", "La", "Li", "Lu", "Mg", "Mn", "Mo", "Nb", "Nd", "Ni", "Os", "P", "Pb",
+                "Pd", "Pr", "Pt", "Re", "Rh", "Ru", "Sb", "Sc", "Si", "Sm", "Sn", "Sr", "Ta", "Tb", "Ti", "Tm", "V",
+                "W", "Y", "Yb", "Zn", "Zr"]
 
+# The melting temperature in Kelvin of the 56 selected elements.
 Tm_list = [1234.93, 933.47, 1337.33, 2349.0, 1560.0, 544.4, 3800.0, 1115.0, 594.22, 1068.0, 1768.0, 2180.0, 1357.77,
            1680.0, 1802.0, 1811.0, 1585.0, 1211.4, 2506.0, 1734.0, 429.75, 2739.0, 1193.0, 453.69, 1925.0, 923.0,
            1519.0, 2896.0, 2750.0, 1297.0, 1728.0, 3306.0, 317.3, 600.61, 1828.05, 1208.0, 2041.4, 3459.0, 2237.0,
            2607.0, 903.78, 1814.0, 1687.0, 1345.0, 505.08, 1050.0, 3290.0, 1629.0, 1941.0, 1818.0, 2183.0, 3695.0,
            1799.0, 1097.0, 692.68, 2128.0]
 
+# The valence electron concentration of the 56 selected elements.
 VEC_list = [11.0, 3.0, 11.0, 3.0, 2.0, 15.0, 4.0, 2.0, 12.0, 3.0, 9.0, 6.0, 11.0, 2.0, 2.0, 8.0, 3.0, 14.0, 4.0, 2.0,
             13.0, 9.0, 3.0, 1.0, 3.0, 2.0, 7.0, 6.0, 5.0, 2.0, 10.0, 8.0, 5.0, 14.0, 28.0, 2.0, 10.0, 7.0, 9.0, 8.0,
             15.0, 3.0, 4.0, 2.0, 14.0, 2.0, 5.0, 2.0, 4.0, 2.0, 5.0, 6.0, 3.0, 2.0, 12.0, 4.0]
 
-# list of atomic radius
+# The atomic radius in Angstrom of the 56 selected elements.
 radii_list = [1.6, 1.25, 1.35, 0.85, 1.05, 1.6, 0.7, 1.8, 1.55, 1.85, 1.35, 1.4, 1.35, 1.75, 1.75, 1.4, 1.8, 1.25, 1.55,
               1.75, 1.55, 1.35, 1.95, 1.45, 1.75, 1.5, 1.4, 1.45, 1.45, 1.85, 1.35, 1.3, 1.0, 1.8, 1.4, 1.85, 1.35,
               1.35, 1.35, 1.3, 1.45, 1.6, 1.1, 1.85, 1.45, 2.0, 1.45, 1.75, 1.4, 1.75, 1.35, 1.35, 1.8, 1.75, 1.35,
               1.55]
 
+# The electronegativity of the 56 selected elements.
 X_list = [1.93, 1.61, 2.54, 2.04, 1.57, 2.02, 2.55, 1.0, 1.69, 1.12, 1.88, 1.66, 1.9, 1.22, 1.24, 1.83, 1.2, 2.01, 1.3,
           1.23, 1.78, 2.2, 1.1, 0.98, 1.27, 1.31, 1.55, 2.16, 1.6, 1.14, 1.91, 2.2, 2.19, 2.33, 2.2, 1.13, 2.28, 1.9,
           2.28, 2.2, 2.05, 1.36, 1.9, 1.17, 1.96, 0.95, 1.5, 1.1, 1.54, 1.25, 1.63, 2.36, 1.22, 1.1, 1.65, 1.33]
 
+# The mass in amu of the 56 selected elements.
 mass_list = [107.8682, 26.9815386, 196.966569, 10.811, 9.012182, 208.9804, 12.0107, 40.078, 112.411, 140.116, 58.933195,
              51.9961, 63.546, 162.5, 167.259, 55.845, 157.25, 72.64, 178.49, 164.93032, 114.818, 192.217, 138.90547,
              6.941, 174.967, 24.305, 54.938045, 95.94, 92.90638, 144.242, 58.6934, 190.23, 30.973762, 207.2, 106.42,
              140.90765, 195.084, 186.207, 102.9055, 101.07, 121.76, 44.955912, 28.0855, 150.36, 118.71, 87.62,
              180.94788, 158.92535, 47.867, 168.93421, 50.9415, 183.84, 88.90585, 173.04, 65.409, 91.224]
 
+# The volume in cm3/mol of the 56 selected elements.
 volume_list = [10.27, 10.0, 10.21, 4.39, 4.85, 21.31, 5.29, 26.2, 13.0, 20.69, 6.67, 7.23, 7.11, 19.01, 18.46, 7.09,
                19.9, 13.63, 13.44, 18.74, 15.76, 8.52, 22.39, 13.02, 17.78, 14.0, 7.35, 9.38, 10.83, 20.59, 6.59, 8.42,
                17.02, 18.26, 8.56, 20.8, 9.09, 8.86, 8.28, 8.17, 18.19, 15.0, 12.06, 19.98, 16.29, 33.94, 10.85, 19.3,
                10.64, 19.1, 8.32, 9.47, 19.88, 24.84, 9.16, 14.02]
 
-# price of elements, unit: usd/kg
+# The estimated cost of 56 elements, unit: usd/kg
 price_dic = {
     "Ag": 462, "Al": 1.91, "Au": 38189, "B": 2386, "Be": 831.6, "Bi": 10.34, "C": 24, "Ca": 5.93, "Cd": 1.98, "Ce": 7,
     "Co": 59.5, "Cr": 7.64, "Cu": 5.9, "Dy": 350, "Er": 95, "Fe": 0.08, "Gd": 55, "Ge": 1833, "Hf": 1414, "Ho": 1400,

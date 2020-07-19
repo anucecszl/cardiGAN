@@ -13,11 +13,11 @@ Compositionally-complex Alloy Research Directive Inference GAN, a hybrid empiric
    ```
 5. Create a virtual environment for running, e.g.:
    ```
-   $ python -m venv epcalc
+   $ python -m venv cardigan
    (for Windows)
-      $ cardiGAN\Scripts\activate.bat
+      $ cardigan\Scripts\activate.bat
    (for MacOS/Linux)
-      $ source cardiGAN/bin/activate
+      $ source cardigan/bin/activate
    ```
 6. Run environment and install required packages: 
    ```

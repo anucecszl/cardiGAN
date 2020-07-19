@@ -5,6 +5,7 @@ import hyper_parameters as parameters
 import matminer.utils.data as mm_data
 from pymatgen.core.periodic_table import Element
 
+print('start loading parameter calculator...')
 # Load the trained phase classifier model.
 classifier_path = 'saved_models/classifier_net.pt'
 classifier = cardiGAN.Classifier()
@@ -311,3 +312,6 @@ def calculate_all_parameters(fake_alloy):
         (enthalpy, std_enthalpy, a, delta, omega, entropy, Tm, std_Tm, x, std_x, vec, std_vec, phase, density, price),
         dim=1)
     return params
+
+
+print('finish loading parameter calculator.')

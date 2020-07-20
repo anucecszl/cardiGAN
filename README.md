@@ -14,7 +14,7 @@ The phase classifier network could classify CCAs into three classes: single soli
 4. Empirical parameter calculator:  
 The empirical parameter calculator could calculate 12 empirical parameters of CCAs based on their element compositions. The calculator in this project is hard-coded in PyTorch. A parameter calculator with user interface can be accessed through https://github.com/ZhipengGaGa/Parameter-Calculator-for-CCA.
 
-The configuration of the cardiGAN model:
+The configuration of the cardiGAN model:  
 ![image](http://github.com/ZhipengGaGa/cardiGAN/raw/master/model_configuration.png)
 
 

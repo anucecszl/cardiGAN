@@ -16,6 +16,11 @@ The empirical parameter calculator could calculate 12 empirical parameters of CC
 5. HEA dataset:
 The file HEA_dataset provides the element compositions and reported phases of the 845 CCAs obtained from 11 literatures. Since there are 845 data and the dataset is manually collected by the author, the references are in the form of 'A-B' where A is number of the referred literature where the data was collected, and B is the original reference in the referred literature. It's noted that the training dataset for the model excludes all the repetitive data and alloys with unknown phases. 
 
+- The configuration of the cardiGAN model: [image](http://github.com/ZhipengGaGa/cardiGAN/raw/master/model_configuration.png)
+
+- The model is trained on the element compositions of 278 existing CCAs. The compositions are represented as 56-dimensional vectors with each dimension indicating the molar ratio of a specific element. 
+
+
 References for the dataset:     
 [1] Toda-Caraballo, I. and Rivera-Díaz-del-Castillo, P.E.J. (2016). A criterion for the formation of high entropy alloys based on lattice distortion. Intermetallics, 71, pp.76–87.   
 [2] Qiu, Y., Hu, Y.J., Taylor, A., Styles, M.J., Marceau, R.K.W., Ceguerra, A.V., Gibson, M.A., Liu, Z.K., Fraser, H.L. and Birbilis, N. (2017). A lightweight single-phase AlTiVCr compositionally complex alloy. Acta Materialia, 123, pp.115–124.    
@@ -28,12 +33,6 @@ References for the dataset:
 [9] Yang, X. and Zhang, Y. (2012). Prediction of high-entropy stabilized solid-solution in multi-component alloys. Materials Chemistry and Physics, 132(2-3), pp.233–238.  
 [10] Anand, G., Goodall, R. and Freeman, C.L. (2016). Role of configurational entropy in body-centred cubic or face-centred cubic phase formation in high entropy alloys. Scripta Materialia, 124, pp.90–94.  
 [11] Gorsse, S., Nguyen, M.H., Senkov, O.N. and Miracle, D.B. (2018). Database on the mechanical properties of high entropy alloys and complex concentrated alloys. Data in Brief, 21, pp.2664–2678.
-
-
-
-- The configuration of the cardiGAN model: [image](http://github.com/ZhipengGaGa/cardiGAN/raw/master/model_configuration.png)
-
-- The model is trained on the element compositions of 278 existing CCAs. The compositions are represented as 56-dimensional vectors with each dimension indicating the molar ratio of a specific element. 
 
 ## Installation
 1. git clone this repository.

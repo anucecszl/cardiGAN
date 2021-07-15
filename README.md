@@ -13,6 +13,23 @@ The discriminator network (serving the function of “critic”) can be used to 
 The phase classifier network could classify CCAs into three classes: single solid-solution, mixed solid-solution, and solid-solution with secondary phases. It is used to regularize the training of the generator network. 
 4. Empirical parameter calculator:  
 The empirical parameter calculator could calculate 12 empirical parameters of CCAs based on their element compositions. The calculator in this project is hard coded in PyTorch. A parameter calculator with user interface can be accessed through https://github.com/ZhipengGaGa/Parameter-Calculator-for-CCA.
+5. HEA dataset:
+The file HEA_dataset provides the element compositions and reported phases of the 845 CCAs obtained from 11 literatures. Since there are 845 data and the dataset is manually collected by the author, the references are in the form of 'A-B' where A is number of the referred literature where the data was collected, and B is the original reference in the referred literature. It's noted that the training dataset for the model excludes all the repetitive data and alloys with unknown phases. 
+
+References for the dataset:     
+[1] Toda-Caraballo, I. and Rivera-Díaz-del-Castillo, P.E.J. (2016). A criterion for the formation of high entropy alloys based on lattice distortion. Intermetallics, 71, pp.76–87.   
+[2] Qiu, Y., Hu, Y.J., Taylor, A., Styles, M.J., Marceau, R.K.W., Ceguerra, A.V., Gibson, M.A., Liu, Z.K., Fraser, H.L. and Birbilis, N. (2017). A lightweight single-phase AlTiVCr compositionally complex alloy. Acta Materialia, 123, pp.115–124.    
+[3] Singh, A.K. and Subramaniam, A. (2014). On the formation of disordered solid solutions in multi-component alloys. Journal of Alloys and Compounds, 587, pp.113–119. 
+[4] Zhang, Y., Zhou, Y.  J., Lin, J.  P., Chen, G.  L. and Liaw, P.  K. (2008). Solid-Solution Phase Formation Rules for Multi-component Alloys. Advanced Engineering Materials, 10(6), pp.534–538.  
+[5] Zhang, Y., Yang, X. and Liaw, P.K. (2012). Alloy Design and Properties Optimization of High-Entropy Alloys. JOM, 64(7), pp.830–838.   
+[6] Miracle, D.B. and Senkov, O.N. (2017). A critical review of high entropy alloys and related concepts. Acta Materialia, [online] 122, pp.448–511. Available at: https://www.sciencedirect.com/science/article/pii/S1359645416306759.  
+[7] Feng, R., Gao, M., Lee, C., Mathes, M., Zuo, T., Chen, S., Hawk, J., Zhang, Y. and Liaw, P. (2016). Design of Light-Weight High-Entropy Alloys. Entropy, 18(9), p.333.  
+[8] Dong, Y., Lu, Y., Jiang, L., Wang, T. and Li, T. (2014). Effects of electro-negativity on the stability of topologically close-packed phase in high entropy alloys.  Intermetallics, 52, pp.105–109.  
+[9] Yang, X. and Zhang, Y. (2012). Prediction of high-entropy stabilized solid-solution in multi-component alloys. Materials Chemistry and Physics, 132(2-3), pp.233–238.  
+[10] Anand, G., Goodall, R. and Freeman, C.L. (2016). Role of configurational entropy in body-centred cubic or face-centred cubic phase formation in high entropy alloys. Scripta Materialia, 124, pp.90–94.  
+[11] Gorsse, S., Nguyen, M.H., Senkov, O.N. and Miracle, D.B. (2018). Database on the mechanical properties of high entropy alloys and complex concentrated alloys. Data in Brief, 21, pp.2664–2678.
+
+
 
 - The configuration of the cardiGAN model: [image](http://github.com/ZhipengGaGa/cardiGAN/raw/master/model_configuration.png)
 

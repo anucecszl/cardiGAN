@@ -12,7 +12,7 @@ The discriminator network (serving the function of “critic”) can be used to 
 3. Phase classifier network (pre-trained):  
 The phase classifier network could classify CCAs into three classes: single solid-solution, mixed solid-solution, and solid-solution with secondary phases. It is used to regularize the training of the generator network. 
 4. Empirical parameter calculator:  
-The empirical parameter calculator could calculate 12 empirical parameters of CCAs based on their element compositions. The calculator in this project is hard coded in PyTorch. A parameter calculator with user interface can be accessed through https://github.com/ZhipengGaGa/Parameter-Calculator-for-CCA.
+The empirical parameter calculator could calculate 12 empirical parameters of CCAs based on their element compositions. The calculator in this project is hard coded in PyTorch. A parameter calculator with user interface can be accessed through https://github.com/anucecszl/Parameter-Calculator-for-CCA.
 5. HEA dataset:
 The file HEA_dataset provides the element compositions and reported phases of the 845 CCAs obtained from 11 literatures. Since there are 845 data and the dataset is manually collected by the author, the references are in the form of 'A-B' where A is number of the referred literature where the data was collected, and B is the original reference in the referred literature. It's noted that the training dataset for the model excludes all the repetitive data and alloys with unknown phases. 
 
